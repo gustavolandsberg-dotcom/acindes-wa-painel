@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACINDES · Painel WA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
+  :root {
+    --bg:#0a0f0a;--surface:#111711;--surface2:#1a221a;--border:#2a372a;
+    --green:#25d366;--green-dim:#1a9e4a;--green-glow:rgba(37,211,102,0.15);
+    --amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;
+    --text:#e8f5e8;--text-dim:#6b8f6b;--text-muted:#3d5c3d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding-bottom:80px}
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}
+  .header-logo{width:34px;height:34px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+  .header-title{font-size:15px;font-weight:700}
+  .header-sub{font-size:10px;color:var(--text-dim);font-family:'DM Mono',monospace}
+  .dot-wrap{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10px;font-family:'DM Mono',monospace;color:var(--text-dim)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .config-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .cfg-label{font-size:10px;font-family:'DM Mono',monospace;color:var(--text-dim);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
+  .cfg-input{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:5px 9px;font-size:11px;font-family:'DM Mono',monospace;color:var(--text)}
+  .cfg-input:focus{outline:none;border-color:var(--green-dim)}
+  .cfg-input.url{width:260px}.cfg-input.inst{width:80px}
+  .save-btn{background:var(--green-dim);border:none;border-radius:7px;padding:6px 12px;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;color:white;cursor:pointer}
+  .recipient-bar{padding:10px 16px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+  .recipient-label{font-size:11px;font-family:'DM Mono',monospace;color:var(--text-dim);white-space:nowrap}
+  .recipient-input{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:5px 9px;font-size:12px;font-family:'DM Mono',monospace;color:var(--text);flex:1}
+  .recipient-input:focus{outline:none;border-color:var(--green-dim)}
+  .fetch-btn{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:var(--text-dim);cursor:pointer;white-space:nowrap}
+  .fetch-btn:hover{border-color:var(--green-dim);color:var(--text)}
+  .groups-list{display:none;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:0 16px 8px;overflow:hidden;max-height:220px;overflow-y:auto}
+  .groups-list.show{display:block}
+  .group-item{padding:9px 14px;cursor:pointer;border-bottom:1px solid var(--border)}
+  .group-item:hover{background:var(--surface2)}
+  .group-item:last-child{border-bottom:none}
+  .group-name{font-size:13px;font-weight:600;color:var(--text)}
+  .group-id{font-size:10px;color:var(--text-muted);font-family:'DM Mono',monospace;margin-top:2px}
+  .tabs{display:flex;gap:0;padding:14px 16px 0;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{font-size:11px;font-weight:600;padding:7px 12px;border-radius:8px 8px 0 0;border:1px solid transparent;border-bottom:none;cursor:pointer;white-space:nowrap;color:var(--text-dim);background:transparent;font-family:'Syne',sans-serif}
+  .tab.active{background:var(--surface);border-color:var(--border);color:var(--text)}
+  .content{background:var(--surface);border:1px solid var(--border);border-radius:0 12px 12px 12px;margin:0 16px}
+  .day{display:none}.day.active{display:block}
+  .msg-card{border-bottom:1px solid var(--border);padding:14px}
+  .msg-card:last-child{border-bottom:none}
+  .msg-header{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px}
+  .msg-time{font-family:'DM Mono',monospace;font-size:10px;color:var(--green);background:var(--green-glow);border:1px solid rgba(37,211,102,0.2);border-radius:5px;padding:2px 7px;white-space:nowrap;margin-top:2px}
+  .msg-title{font-size:13px;font-weight:600;flex:1}
+  .edit-indicator{font-size:10px;font-family:'DM Mono',monospace;color:var(--text-muted);margin-left:auto;white-space:nowrap}
+  .msg-toolbar{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+  .tool-btn{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:var(--text-dim);cursor:pointer;transition:all .15s}
+  .tool-btn:hover{border-color:var(--green-dim);color:var(--text)}
+  .tool-btn.reset{color:var(--amber);border-color:rgba(245,158,11,0.3)}
+  .tool-btn.reset:hover{background:rgba(245,158,11,0.1)}
+  .msg-edit-wrap{position:relative;margin-bottom:8px}
+  .msg-body{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:11px 12px;font-size:12.5px;font-family:'DM Mono',monospace;color:var(--text-dim);line-height:1.7;white-space:pre-wrap;min-height:80px;max-height:220px;overflow-y:auto;outline:none;cursor:text;transition:border-color .15s}
+  .msg-body:focus{border-color:var(--green-dim);color:var(--text)}
+  .msg-actions{display:flex;gap:7px}
+  .btn-send{flex:1;background:var(--green);border:none;border-radius:10px;padding:10px;font-size:13px;font-weight:700;font-family:'Syne',sans-serif;color:#0a0f0a;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s}
+  .btn-send:hover{background:#20c45a}.btn-send:active{transform:scale(.98)}
+  .btn-send.sending{background:var(--green-dim);pointer-events:none}
+  .btn-send.sent{background:#166534;color:#86efac}
+  .btn-send.error{background:#7f1d1d;color:#fca5a5}
+  .btn-copy{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:13px;color:var(--text-dim);cursor:pointer;font-family:'Syne',sans-serif;font-weight:600;transition:all .15s}
+  .btn-copy:hover{border-color:var(--green-dim);color:var(--text)}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:9px 18px;font-size:12px;font-family:'DM Mono',monospace;color:var(--text);transition:transform .3s;z-index:999;white-space:nowrap}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast.green{border-color:var(--green);color:var(--green)}
+  .toast.red{border-color:var(--red);color:var(--red)}
+  .toast.blue{border-color:var(--blue);color:var(--blue)}
+  .loading{text-align:center;padding:16px;font-size:12px;font-family:'DM Mono',monospace;color:var(--text-dim)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">📋</div>
+  <div>
+    <div class="header-title">ACINDES · Painel WA</div>
+    <div class="header-sub">Clinical Excellence · Würzburg 2026</div>
+  </div>
+  <div class="dot-wrap"><div class="dot"></div>online</div>
+</div>
+
+<div class="config-bar">
+  <span class="cfg-label">URL</span>
+  <input class="cfg-input url" id="apiUrl" placeholder="https://evolution-api-....railway.app">
+  <span class="cfg-label">Instância</span>
+  <input class="cfg-input inst" id="instance" value="acindes">
+  <button class="save-btn" onclick="saveConfig()">💾 Salvar</button>
+</div>
+
+<div class="recipient-bar">
+  <span class="recipient-label">📱 Para:</span>
+  <input class="recipient-input" id="recipient" placeholder="Número ou ID do grupo">
+  <button class="fetch-btn" onclick="fetchGroups()">🔍 Grupos</button>
+</div>
+
+<div class="groups-list" id="groupsList"></div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showDay('pre',this)">Pré-viagem</button>
+  <button class="tab" onclick="showDay('d1',this)">3 mai</button>
+  <button class="tab" onclick="showDay('d2',this)">4 mai · D1</button>
+  <button class="tab" onclick="showDay('d3',this)">5 mai · D2</button>
+  <button class="tab" onclick="showDay('d4',this)">Partida</button>
+</div>
+
+<div class="content">
+
+  <div class="day active" id="day-pre">
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Antes</span><span class="msg-title">Boas-vindas ao grupo</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('pre-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('pre-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-pre-1" contenteditable="true">Olá, equipe! 👋
+
+Sou Gustavo Landsberg, Coordenador Científico da ACINDES e estarei com vocês durante todo o programa *Clinical Excellence: Optimizing Bispecific Outcomes in Multiple Myeloma* em Würzburg, Alemanha (4 e 5 de maio).
+
+Estou à disposição para qualquer dúvida sobre o conteúdo científico do programa. Para questões logísticas, nosso CL Federico Suárez estará ao lado.
+
+Em breve compartilharemos todas as informações de viagem. Um abraço!</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-pre-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-pre-1')">Copiar</button></div>
+    </div>
+  </div>
+
+  <div class="day" id="day-d1">
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Chegada FRA</span><span class="msg-title">A caminho do hotel</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d1-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d1-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d1-1" contenteditable="true">Equipe, estamos a caminho do hotel! 🚌 Chegada prevista em aproximadamente [X] minutos. Até já!</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d1-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d1-1')">Copiar</button></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Noite</span><span class="msg-title">Agenda do Dia 1 (4 mai)</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d1-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d1-2')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d1-2" contenteditable="true">Bom dia antecipado! 🌟 Amanhã começa nosso programa científico. Agenda *Dia 1 — 4 de maio*:
+
+📍 Uniklinikum Würzburg
+🚌 Transfer hotel→CoE: [HORÁRIO]
+
+09:00 Abertura — Dr. Leo Rasche
+09:30 Programa imunoterapia — Prof. Einsele + Prof. Topp
+10:15 Overview biespecíficos (Tec, Tal, Elra) — Dr. Rasche
+11:15 Discussão de casos clínicos
+12:15 Almoço
+13:15 Tour guiado pela clínica
+14:30 Neurotoxicidade/URTI — Dra. Fleischer
+15:00 Disgeusia — Dr. Düll
+15:30 CRS — Dra. Riedhammer
+16:30 Infecções — Dra. Kadel
+17:00 EMD e CNS — Prof. Rasche
+17:30 Discussão de casos
+
+📎 Caso clínico: se não enviou ainda, favor enviar hoje!
+
+Boa noite! 🌙</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d1-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d1-2')">Copiar</button></div>
+    </div>
+  </div>
+
+  <div class="day" id="day-d2">
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Manhã cedo</span><span class="msg-title">Lembrete transfer — Dia 1</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d2-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d2-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d2-1" contenteditable="true">Bom dia! ☀️ Hoje começa nosso programa no Uniklinikum Würzburg com o Dr. Leo Rasche. O ônibus parte do hotel às [HORÁRIO]. Estejam no lobby às [HORÁRIO -10min]. Até já! 🚌</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d2-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d2-1')">Copiar</button></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Após cena</span><span class="msg-title">Agenda do Dia 2 (5 mai)</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d2-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d2-2')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d2-2" contenteditable="true">Que dia incrível! 🧬 Amanhã continuamos com o *Dia 2 — 5 de maio*:
+
+08:30 Fatores de risco CRS e infecções — Dra. Riedhammer
+09:00 Resistência — Dra. Kadel
+09:30 Sequenciamento — Dr. Waldschmidt
+10:00 Dose schedule — Dr. Eisele + Nazia Affrin
+10:30 Novos biespecíficos — Prof. Stuhler
+11:00 GPRC5D como alvo — Prof. Kortüm + Dr. Rasche
+11:30 Almoço
+12:15 Futuro dos biespecíficos e triespecíficos
+12:30 Encerramento e entrega de certificados 🏅
+
+Mesmo horário de saída. Boa noite! 🌙</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d2-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d2-2')">Copiar</button></div>
+    </div>
+  </div>
+
+  <div class="day" id="day-d3">
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Manhã cedo</span><span class="msg-title">Lembrete transfer — Dia 2</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d3-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d3-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d3-1" contenteditable="true">Bom dia! ☀️ Último dia do programa. O ônibus parte às [HORÁRIO]. Estejam no lobby às [HORÁRIO -10min]. Vamos fechar com chave de ouro! 🏅</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d3-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d3-1')">Copiar</button></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Após encerramento</span><span class="msg-title">Despedida do grupo</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d3-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d3-2')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d3-2" contenteditable="true">Queridos colegas,
+
+Encerramos hoje o *Clinical Excellence: Optimizing Bispecific Outcomes in Multiple Myeloma* 🎓
+
+Foi uma honra acompanhar vocês nesses dois dias ao lado do Prof. Leo Rasche e da equipe do Uniklinikum Würzburg.
+
+Transfer para FRA: saída às [HORÁRIO]. Qualquer dúvida, estamos à disposição!
+
+Um abraço e até a próxima! 🤝</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d3-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d3-2')">Copiar</button></div>
+    </div>
+  </div>
+
+  <div class="day" id="day-d4">
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Manhã</span><span class="msg-title">Lembrete check-out e transfer</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d4-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d4-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d4-1" contenteditable="true">Bom dia! ☀️ Hoje é dia de retorno. Transfer para Frankfurt parte às [HORÁRIO]. Façam o check-out e estejam no lobby às [HORÁRIO -15min] com as malas. Boa viagem! ✈️</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d4-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d4-1')">Copiar</button></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let API_URL = localStorage.getItem('wa_api_url') || '';
+  let INSTANCE = localStorage.getItem('wa_instance') || 'acindes';
+  let API_KEY = localStorage.getItem('wa_apikey') || '';
+  const DEFAULTS = {};
+
+  document.getElementById('apiUrl').value = API_URL;
+  document.getElementById('instance').value = INSTANCE;
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.msg-body').forEach(el => {
+      DEFAULTS[el.id] = el.innerText;
+      const saved = localStorage.getItem('msg_' + el.id);
+      if (saved) el.innerText = saved;
+      el.addEventListener('input', () => localStorage.setItem('msg_' + el.id, el.innerText));
+    });
+    if (!API_KEY) {
+      const key = prompt('Cole sua API Key da Evolution API\n(Railway → Evolution API → Variables → AUTHENTICATION_API_KEY):');
+      if (key) { localStorage.setItem('wa_apikey', key); API_KEY = key; }
+    }
+    if (!API_URL) {
+      const url = prompt('Cole a URL do seu servidor Evolution API\n(ex: https://evolution-api-production-66e7e.up.railway.app):');
+      if (url) { localStorage.setItem('wa_api_url', url.trim()); API_URL = url.trim(); document.getElementById('apiUrl').value = API_URL; }
+    }
+    const savedR = localStorage.getItem('wa_recipient');
+    if (savedR) document.getElementById('recipient').value = savedR;
+    document.getElementById('recipient').addEventListener('input', e => localStorage.setItem('wa_recipient', e.target.value));
+  });
+
+  function saveConfig() {
+    API_URL = document.getElementById('apiUrl').value.trim();
+    INSTANCE = document.getElementById('instance').value.trim();
+    localStorage.setItem('wa_api_url', API_URL);
+    localStorage.setItem('wa_instance', INSTANCE);
+    showToast('Configuração salva!', 'green');
+  }
+
+  function showDay(id, btn) {
+    document.querySelectorAll('.day').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('day-' + id).classList.add('active');
+    btn.classList.add('active');
+    document.getElementById('groupsList').classList.remove('show');
+  }
+
+  function resetMsg(id) {
+    const el = document.getElementById('msg-' + id);
+    if (DEFAULTS['msg-' + id]) { el.innerText = DEFAULTS['msg-' + id]; localStorage.removeItem('msg_msg-' + id); showToast('Restaurado!', 'blue'); }
+  }
+
+  function clearMsg(id) {
+    const el = document.getElementById('msg-' + id);
+    el.innerText = ''; el.focus();
+    localStorage.setItem('msg_msg-' + id, '');
+  }
+
+  function copyMsg(msgId) {
+    navigator.clipboard.writeText(document.getElementById(msgId).innerText).then(() => showToast('Copiado!', 'green'));
+  }
+
+  async function sendMsg(btn, msgId) {
+    const text = document.getElementById(msgId).innerText.trim();
+    const recipient = document.getElementById('recipient').value.trim();
+    if (!recipient) { showToast('Informe o número ou grupo', 'red'); return; }
+    if (!text) { showToast('Mensagem está vazia', 'red'); return; }
+    if (!API_KEY) { API_KEY = prompt('API Key:') || ''; if (!API_KEY) return; localStorage.setItem('wa_apikey', API_KEY); }
+    const orig = btn.innerHTML;
+    btn.classList.add('sending'); btn.innerHTML = '⏳ Enviando...';
+    try {
+      const res = await fetch(`${API_URL}/message/sendText/${INSTANCE}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': API_KEY },
+        body: JSON.stringify({ number: recipient, text: text })
+      });
+      if (res.ok) {
+        btn.classList.remove('sending'); btn.classList.add('sent'); btn.innerHTML = '✅ Enviado!';
+        showToast('Mensagem enviada!', 'green');
+        setTimeout(() => { btn.classList.remove('sent'); btn.innerHTML = orig; }, 3000);
+      } else { throw new Error('Erro ' + res.status); }
+    } catch(e) {
+      btn.classList.remove('sending'); btn.classList.add('error'); btn.innerHTML = '❌ Erro';
+      showToast('Erro: ' + e.message, 'red');
+      setTimeout(() => { btn.classList.remove('error'); btn.innerHTML = orig; }, 3000);
+    }
+  }
+
+  async function fetchGroups() {
+    const gl = document.getElementById('groupsList');
+    gl.innerHTML = '<div class="loading">🔍 Buscando grupos...</div>';
+    gl.classList.add('show');
+    if (!API_KEY) { API_KEY = prompt('API Key:') || ''; if (!API_KEY) { gl.classList.remove('show'); return; } localStorage.setItem('wa_apikey', API_KEY); }
+    try {
+      const res = await fetch(`${API_URL}/group/fetchAllGroups/${INSTANCE}?getParticipants=false`, {
+        headers: { 'apikey': API_KEY }
+      });
+      if (!res.ok) throw new Error('Status ' + res.status);
+      const data = await res.json();
+      const groups = Array.isArray(data) ? data : [];
+      if (!groups.length) { gl.innerHTML = '<div class="loading">Nenhum grupo encontrado. Crie o grupo primeiro no WhatsApp.</div>'; return; }
+      gl.innerHTML = groups.map(g => `
+        <div class="group-item" onclick="selectGroup('${g.id}','${(g.subject||'Grupo').replace(/'/g,"\\'")}')">
+          <div class="group-name">${g.subject || 'Grupo sem nome'}</div>
+          <div class="group-id">${g.id}</div>
+        </div>`).join('');
+    } catch(e) {
+      gl.innerHTML = '<div class="loading">Erro ao buscar grupos: ' + e.message + '</div>';
+    }
+  }
+
+  function selectGroup(id, name) {
+    document.getElementById('recipient').value = id;
+    localStorage.setItem('wa_recipient', id);
+    document.getElementById('groupsList').classList.remove('show');
+    showToast('Grupo: ' + name, 'green');
+  }
+
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = 'toast show ' + (type || '');
+    setTimeout(() => t.className = 'toast', 2500);
+  }
+</script>
+</body>
+</html>

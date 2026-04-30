@@ -1,0 +1,9 @@
+{
+  "name": "acindes-wa-painel",
+  "version": "1.0.0",
+  "description": "WhatsApp dispatcher panel for ACINDES",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

@@ -82,7 +82,7 @@
   <div class="header-logo">📋</div>
   <div>
     <div class="header-title">ACINDES · Painel WA</div>
-    <div class="header-sub">Clinical Excellence · Würzburg 2026</div>
+    <div class="header-sub">MM 1ª linha · Salvador 2026</div>
   </div>
   <div class="dot-wrap"><div class="dot"></div>online</div>
 </div>
@@ -102,121 +102,147 @@
 <div class="groups-list" id="groupsList"></div>
 
 <div class="tabs">
-  <button class="tab active" onclick="showDay('pre',this)">Pré-viagem</button>
-  <button class="tab" onclick="showDay('d1',this)">3 mai</button>
-  <button class="tab" onclick="showDay('d2',this)">4 mai · D1</button>
-  <button class="tab" onclick="showDay('d3',this)">5 mai · D2</button>
-  <button class="tab" onclick="showDay('d4',this)">Partida</button>
+  <button class="tab active" onclick="showDay('pre',this)">11 nov · Grupo</button>
+  <button class="tab" onclick="showDay('d0',this)">12 nov · Chegada</button>
+  <button class="tab" onclick="showDay('d1',this)">13 nov · D1</button>
+  <button class="tab" onclick="showDay('d2',this)">14 nov · D2</button>
 </div>
 
 <div class="content">
 
   <div class="day active" id="day-pre">
     <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Antes</span><span class="msg-title">Boas-vindas ao grupo</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('pre-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('pre-1')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-pre-1" contenteditable="true">Olá, equipe! 👋
+      <div class="msg-header"><span class="msg-time">Abertura do grupo</span><span class="msg-title">Apresentação do Gustavo</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('sv-pre-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('sv-pre-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-sv-pre-1" contenteditable="true">Olá a todos! Sou o Dr. Gustavo Landsberg e gostaria de lhes dar as boas-vindas em nome da ACINDES (Associação Civil para Pesquisa e Desenvolvimento em Saúde). Estarei à disposição para qualquer dúvida relacionada à agenda acadêmica e aos casos clínicos que desejem apresentar. Esperamos que esta experiência atenda às suas expectativas e contribua para a sua prática clínica.</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-sv-pre-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-sv-pre-1')">Copiar</button></div>
+    </div>
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">Após apresentação</span><span class="msg-title">Casos clínicos (+ anexar o template)</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('sv-pre-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('sv-pre-2')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-sv-pre-2" contenteditable="true">Olá, Drs.! Recordamos que haverá na preceptoria um espaço especial dedicado à apresentação de casos clínicos da vida real. Todos os casos são bem-vindos. Deixamos este template para quem deseje compartilhá-los com o Dr. Crusoé e sua equipe. Por gentileza, enviar os casos para eszklarz@emawwe.com Obrigado!</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-sv-pre-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-sv-pre-2')">Copiar</button></div>
+    </div>
+  </div>
 
-Sou Gustavo Landsberg, Coordenador Científico da ACINDES e estarei com vocês durante todo o programa *Clinical Excellence: Optimizing Bispecific Outcomes in Multiple Myeloma* em Würzburg, Alemanha (4 e 5 de maio).
+  <div class="day" id="day-d0">
+    <div class="msg-card">
+      <div class="msg-header"><span class="msg-time">21:00</span><span class="msg-title">Lobby amanhã 08:15 + agenda do Dia 1</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('sv-d0-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('sv-d0-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-sv-d0-1" contenteditable="true">Boa noite! 🌙 Amanhã começa a preceptoria *Mieloma Múltiplo: jornada do tratamento em primeira linha* com o Dr. Edvan Crusoé.
 
-Estou à disposição para qualquer dúvida sobre o conteúdo científico do programa. Para questões logísticas, nosso CL Federico Suárez estará ao lado.
+🕗 Encontro no *lobby do hotel às 08:15* para o transfer.
+🎒 Não esqueçam seus materiais (caderno e credencial).
 
-Em breve compartilharemos todas as informações de viagem. Um abraço!</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-pre-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-pre-1')">Copiar</button></div>
+*Dia 1 | Sexta-feira, 13 de novembro*
+📍 Rede D'Or Canela — Av. Araújo Pinho, 439, Canela
+
+08:30 Introdução ao curso
+08:40 Diagnóstico e classificação prognóstica do MM — Dra. Larissa Lucas
+09:30 MM smoldering e MGUS — Dra. Joanna Leal
+10:40 ☕ Intervalo
+11:00 Tratamento MM smoldering — Dr. Edvan Crusoé
+11:50 Tratamento de paciente não elegível ao TMO: prática clínica — Dr. Edvan Crusoé
+13:20 🍽️ Almoço
+14:30 Novo critério de resposta (IMWG) — Dra. Larissa Lucas
+15:30 Acompanhamento de imagem — Dr. Fernando Tranquillini
+16:20 Encerramento do Dia 1
+
+_Após cada aula: discussão de casos clínicos, perguntas e respostas._
+
+Até amanhã!</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-sv-d0-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-sv-d0-1')">Copiar</button></div>
     </div>
   </div>
 
   <div class="day" id="day-d1">
     <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Chegada FRA</span><span class="msg-title">A caminho do hotel</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d1-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d1-1')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d1-1" contenteditable="true">Equipe, estamos a caminho do hotel! 🚌 Chegada prevista em aproximadamente [X] minutos. Até já!</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d1-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d1-1')">Copiar</button></div>
+      <div class="msg-header"><span class="msg-time">Manhã</span><span class="msg-title">Agenda do Dia 1</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('sv-d1-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('sv-d1-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-sv-d1-1" contenteditable="true">Bom dia! ☀️ Hoje é o primeiro dia da preceptoria *Mieloma Múltiplo: jornada do tratamento em primeira linha*.
+
+*Dia 1 | Sexta-feira, 13 de novembro*
+📍 Rede D'Or Canela — Av. Araújo Pinho, 439, Canela
+
+08:30 Introdução ao curso
+08:40 Diagnóstico e classificação prognóstica do MM — Dra. Larissa Lucas
+09:30 MM smoldering e MGUS — Dra. Joanna Leal
+10:40 ☕ Intervalo
+11:00 Tratamento MM smoldering — Dr. Edvan Crusoé
+11:50 Tratamento de paciente não elegível ao TMO: prática clínica — Dr. Edvan Crusoé
+13:20 🍽️ Almoço
+14:30 Novo critério de resposta (IMWG) — Dra. Larissa Lucas
+15:30 Acompanhamento de imagem — Dr. Fernando Tranquillini
+16:20 Encerramento do Dia 1
+
+_Após cada aula: discussão de casos clínicos, perguntas e respostas._
+
+Ótimo dia a todos!</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-sv-d1-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-sv-d1-1')">Copiar</button></div>
     </div>
     <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Noite</span><span class="msg-title">Agenda do Dia 1 (4 mai)</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d1-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d1-2')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d1-2" contenteditable="true">Bom dia antecipado! 🌟 Amanhã começa nosso programa científico. Agenda *Dia 1 — 4 de maio*:
+      <div class="msg-header"><span class="msg-time">21:00</span><span class="msg-title">Lobby amanhã 08:30 + agenda do Dia 2</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('sv-d1-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('sv-d1-2')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-sv-d1-2" contenteditable="true">Boa noite! 🌙 Obrigado por este primeiro dia.
 
-📍 Uniklinikum Würzburg
-🚌 Transfer hotel→CoE: [HORÁRIO]
+🕣 Amanhã o encontro é no *lobby do hotel às 08:30* para o transfer.
+🎒 Não esqueçam seus materiais.
 
-09:00 Abertura — Dr. Leo Rasche
-09:30 Programa imunoterapia — Prof. Einsele + Prof. Topp
-10:15 Overview biespecíficos (Tec, Tal, Elra) — Dr. Rasche
-11:15 Discussão de casos clínicos
-12:15 Almoço
-13:15 Tour guiado pela clínica
-14:30 Neurotoxicidade/URTI — Dra. Fleischer
-15:00 Disgeusia — Dr. Düll
-15:30 CRS — Dra. Riedhammer
-16:30 Infecções — Dra. Kadel
-17:00 EMD e CNS — Prof. Rasche
-17:30 Discussão de casos
+*Dia 2 | Sábado, 14 de novembro*
+📍 Rede D'Or Canela — Av. Araújo Pinho, 439, Canela
 
-📎 Caso clínico: se não enviou ainda, favor enviar hoje!
+08:45 Tratamento do paciente elegível ao TMO: prática clínica — Dr. Edvan Crusoé
+10:00 Tratamento dos pacientes MM RR (visão geral) — Dr. Edvan Crusoé
+10:50 Principais eventos adversos e suporte (não infeccioso) — Dr. Edvan Crusoé
+12:00 🍽️ Almoço
+13:20 Suporte profilático infeccioso e vacinas — Dr. Fabio Amorim
+14:00 Doença óssea: quais são as ações terapêuticas? — Dra. Larissa Lucas
+15:25 🏥 Visita à Rede D'Or Oncologia — CTM — Hospital São Rafael (Av. São Rafael, 2152)
+16:30 Encerramento
 
-Boa noite! 🌙</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d1-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d1-2')">Copiar</button></div>
+_Após cada aula: discussão de casos clínicos, perguntas e respostas._
+
+Até amanhã!</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-sv-d1-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-sv-d1-2')">Copiar</button></div>
     </div>
   </div>
 
   <div class="day" id="day-d2">
     <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Manhã cedo</span><span class="msg-title">Lembrete transfer — Dia 1</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d2-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d2-1')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d2-1" contenteditable="true">Bom dia! ☀️ Hoje começa nosso programa no Uniklinikum Würzburg com o Dr. Leo Rasche. O ônibus parte do hotel às [HORÁRIO]. Estejam no lobby às [HORÁRIO -10min]. Até já! 🚌</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d2-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d2-1')">Copiar</button></div>
+      <div class="msg-header"><span class="msg-time">Manhã</span><span class="msg-title">Agenda do Dia 2</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('sv-d2-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('sv-d2-1')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-sv-d2-1" contenteditable="true">Bom dia! ☀️ Último dia da preceptoria *Mieloma Múltiplo: jornada do tratamento em primeira linha*.
+
+*Dia 2 | Sábado, 14 de novembro*
+📍 Rede D'Or Canela — Av. Araújo Pinho, 439, Canela
+
+08:45 Tratamento do paciente elegível ao TMO: prática clínica — Dr. Edvan Crusoé
+10:00 Tratamento dos pacientes MM RR (visão geral) — Dr. Edvan Crusoé
+10:50 Principais eventos adversos e suporte (não infeccioso) — Dr. Edvan Crusoé
+12:00 🍽️ Almoço
+13:20 Suporte profilático infeccioso e vacinas — Dr. Fabio Amorim
+14:00 Doença óssea: quais são as ações terapêuticas? — Dra. Larissa Lucas
+15:25 🏥 Visita à Rede D'Or Oncologia — CTM — Hospital São Rafael (Av. São Rafael, 2152)
+16:30 Encerramento
+
+_Após cada aula: discussão de casos clínicos, perguntas e respostas._
+
+Ótimo dia a todos!</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-sv-d2-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-sv-d2-1')">Copiar</button></div>
     </div>
     <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Após cena</span><span class="msg-title">Agenda do Dia 2 (5 mai)</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d2-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d2-2')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d2-2" contenteditable="true">Que dia incrível! 🧬 Amanhã continuamos com o *Dia 2 — 5 de maio*:
+      <div class="msg-header"><span class="msg-time">Após a visita</span><span class="msg-title">Despedida do grupo</span><span class="edit-indicator">✏️ editável</span></div>
+      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('sv-d2-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('sv-d2-2')">🗑 Limpar</button></div>
+      <div class="msg-edit-wrap"><div class="msg-body" id="msg-sv-d2-2" contenteditable="true">Queridos colegas,
 
-08:30 Fatores de risco CRS e infecções — Dra. Riedhammer
-09:00 Resistência — Dra. Kadel
-09:30 Sequenciamento — Dr. Waldschmidt
-10:00 Dose schedule — Dr. Eisele + Nazia Affrin
-10:30 Novos biespecíficos — Prof. Stuhler
-11:00 GPRC5D como alvo — Prof. Kortüm + Dr. Rasche
-11:30 Almoço
-12:15 Futuro dos biespecíficos e triespecíficos
-12:30 Encerramento e entrega de certificados 🏅
+Encerramos hoje a preceptoria *Mieloma Múltiplo: jornada do tratamento em primeira linha* 🎓
 
-Mesmo horário de saída. Boa noite! 🌙</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d2-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d2-2')">Copiar</button></div>
-    </div>
-  </div>
+Foi uma honra acompanhar vocês nesses dois dias ao lado do Dr. Edvan Crusoé e da equipe da Rede D'Or Oncologia. Agradecemos à Johnson &amp; Johnson Brasil pelo apoio que tornou esta atividade possível.
 
-  <div class="day" id="day-d3">
-    <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Manhã cedo</span><span class="msg-title">Lembrete transfer — Dia 2</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d3-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d3-1')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d3-1" contenteditable="true">Bom dia! ☀️ Último dia do programa. O ônibus parte às [HORÁRIO]. Estejam no lobby às [HORÁRIO -10min]. Vamos fechar com chave de ouro! 🏅</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d3-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d3-1')">Copiar</button></div>
-    </div>
-    <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Após encerramento</span><span class="msg-title">Despedida do grupo</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d3-2')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d3-2')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d3-2" contenteditable="true">Queridos colegas,
+Se ainda não entregaram o formulário de avaliação, por favor nos entreguem antes de sair — seu feedback é muito importante para nós.
 
-Encerramos hoje o *Clinical Excellence: Optimizing Bispecific Outcomes in Multiple Myeloma* 🎓
-
-Foi uma honra acompanhar vocês nesses dois dias ao lado do Prof. Leo Rasche e da equipe do Uniklinikum Würzburg.
-
-Transfer para FRA: saída às [HORÁRIO]. Qualquer dúvida, estamos à disposição!
-
-Um abraço e até a próxima! 🤝</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d3-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d3-2')">Copiar</button></div>
-    </div>
-  </div>
-
-  <div class="day" id="day-d4">
-    <div class="msg-card">
-      <div class="msg-header"><span class="msg-time">Manhã</span><span class="msg-title">Lembrete check-out e transfer</span><span class="edit-indicator">✏️ editável</span></div>
-      <div class="msg-toolbar"><button class="tool-btn reset" onclick="resetMsg('d4-1')">↩ Restaurar</button><button class="tool-btn" onclick="clearMsg('d4-1')">🗑 Limpar</button></div>
-      <div class="msg-edit-wrap"><div class="msg-body" id="msg-d4-1" contenteditable="true">Bom dia! ☀️ Hoje é dia de retorno. Transfer para Frankfurt parte às [HORÁRIO]. Façam o check-out e estejam no lobby às [HORÁRIO -15min] com as malas. Boa viagem! ✈️</div></div>
-      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-d4-1')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-d4-1')">Copiar</button></div>
+Boa viagem de volta e até a próxima! 🤝</div></div>
+      <div class="msg-actions"><button class="btn-send" onclick="sendMsg(this,'msg-sv-d2-2')">📤 Enviar</button><button class="btn-copy" onclick="copyMsg('msg-sv-d2-2')">Copiar</button></div>
     </div>
   </div>
 
@@ -236,9 +262,9 @@ Um abraço e até a próxima! 🤝</div></div>
       if (saved) el.innerText = saved;
       el.addEventListener('input', () => localStorage.setItem('msg_' + el.id, el.innerText));
     });
-    const savedR = localStorage.getItem('wa_recipient');
+    const savedR = localStorage.getItem('wa_recipient_salvador');
     if (savedR) document.getElementById('recipient').value = savedR;
-    document.getElementById('recipient').addEventListener('input', e => localStorage.setItem('wa_recipient', e.target.value));
+    document.getElementById('recipient').addEventListener('input', e => localStorage.setItem('wa_recipient_salvador', e.target.value));
   });
 
   function saveConfig() {
@@ -317,7 +343,7 @@ Um abraço e até a próxima! 🤝</div></div>
 
   function selectGroup(id, name) {
     document.getElementById('recipient').value = id;
-    localStorage.setItem('wa_recipient', id);
+    localStorage.setItem('wa_recipient_salvador', id);
     document.getElementById('groupsList').classList.remove('show');
     showToast('Grupo: ' + name, 'green');
   }
